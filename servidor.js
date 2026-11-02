@@ -28,7 +28,7 @@ function leerJSON(solicitud) {
         let contenido = "";
         let finalizado = false;
 
-        solicitud.on("data", () => {
+        solicitud.on("data", (fragmento) => {
             contenido += fragmento;
 
             if (contenido.length > 10000) {
@@ -107,7 +107,7 @@ async function atenderAPI(solicitud, respuesta, ruta) {
         if (typeof pasajeros !== "number" || 
             !Number.isInteger(pasajeros) || 
             pasajeros < 0 || 
-            pasajeros > capacidades
+            pasajeros > capacidad
         ) {
             enviarJSON(respuesta, 400, {
                 error: `Los pasajeros deben ser un entero entre 0 y ${capacidad}.`
